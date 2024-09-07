@@ -72,7 +72,7 @@ class TestIngMir(BfRuntimeTest):
 
     def setUp(self):
         client_id = 0
-        p4_name = "lvkai_mirror"
+        p4_name = "test_mirror"
         BfRuntimeTest.setUp(self, client_id, p4_name)
         
         self.bfrt_info = self.interface.bfrt_info_get(p4_name)
@@ -86,10 +86,10 @@ class TestIngMir(BfRuntimeTest):
         self.active_ports = []
 
 #-------------------------------- port related operation ------------------------------------------------
-# get_dev_port(fp_port,lane)  输入前端PORT(port/lane)，返回D_P值
-# add_port(fp_port, lane, speed, fec, an)  启用端口PORT，指定速率、纠错码、自动协商机制。
-# remove_port(fp_port, lane)  关闭端口PORT
-# add_ports(port_list)  批量开启端口，是add_port的封装
+# get_dev_port(fp_port,lane)  Get D_P for a given PORT(port/lane)
+# add_port(fp_port, lane, speed, fec, an)  PORT up, set port speed / FEC / autoneg
+# remove_port(fp_port, lane)  shutdown PORT
+# add_ports(port_list)
 #---------------------------------------------------------------------------------------------------------
     def get_dev_port(self, fp_port, lane):
             ''' Convert front-panel port to dev port.
@@ -233,8 +233,8 @@ class TestIngMir(BfRuntimeTest):
     def runTest(self):
         ports = [
                     (2,0,10,'none',2),
-                    (2,1,10,'none',2), # 141 -- 10.21.0.233-eth2-10.22.0.201
-                    (2,2,10,'none',2), # 142 -- 10.21.0.230-eth2-10.22.0.200
+                    (2,1,10,'none',2),
+                    (2,2,10,'none',2),
                     (2,3,10,'none',2)
                     
                 ]
@@ -269,7 +269,7 @@ class TestIngMir(BfRuntimeTest):
         '''
         logger.info("=============== Testing Basic Ingress Mirroring ===============")
 
-        bfrt_info = self.interface.bfrt_info_get("lvkai_mirror")
+        bfrt_info = self.interface.bfrt_info_get("test_mirror")
 
         mirror_cfg_table = bfrt_info.table_get("$mirror.cfg")
         self.mirror_fwd_table = bfrt_info.table_get("mirror_fwd")
