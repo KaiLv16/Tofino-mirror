@@ -14,7 +14,7 @@ P4 serves the role of "transparent forwarding + traffic statistics." The topolog
 
 Collect packet length information and periodically (e.g., every 12 packets received) send statistical information to the data collection server (configured here as port 124 of the packet reception server).
 The coefficient (+1, -1) is an entry in the table, which is currently predefined in the data plane. It also supports dynamic updates or modifications by the control plane (which requires some code changes).
-The data plane code is lvkai_mirror.p4, and the control plane code is test.py.
+The data plane code is test_mirror.p4, and the control plane code is test.py.
 
 The experimental environment for this part includes: TNA, bf-sde-9.6.0, python3.8.0.
 
